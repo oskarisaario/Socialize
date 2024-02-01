@@ -27,7 +27,7 @@ import UserImage from 'components/UserImage';
 
 
 
-const MyPostWidget = ({ imageUrl }) => {
+const MyPostWidget = ({ imageUrl, socket }) => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState(null);
@@ -35,6 +35,7 @@ const MyPostWidget = ({ imageUrl }) => {
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
@@ -55,6 +56,13 @@ const MyPostWidget = ({ imageUrl }) => {
     });
     const posts = await response.json();
     dispatch(setPosts({ posts }));
+    user.friends.map(friend => 
+      socket.current.emit('sendNotification', {
+        senderName: `${user.firstName} ${user.lastName}`,
+        receiverId: friend._id,
+        type: 'made new Post'
+      })
+    );
     setImage(null);
     setIsImage(false);
     setPost('');
@@ -66,7 +74,7 @@ const MyPostWidget = ({ imageUrl }) => {
       <FlexBetween gap='1.5rem'>
         <UserImage image={imageUrl} />
         <InputBase 
-          placeholder='Write your amazing post here...'
+          placeholder='Write your post here...'
           onChange={(e) => setPost(e.target.value)}
           value={post}
           sx={{ width: '100%', backgroundColor: palette.neutral.light, borderRadius: '2rem', padding: '1rem 2rem'}}
@@ -153,7 +161,7 @@ const MyPostWidget = ({ imageUrl }) => {
           </FlexBetween>
         )}
         <Button
-          disabled={!post || !image}
+          disabled={!post}
           onClick={handlePost}
           sx={{ color: palette.background.alt, backgroundColor: palette.primary.main, borderRadius: '3rem'}}
         >

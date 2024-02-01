@@ -37,7 +37,7 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
         <App />
-    </PersistGate>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

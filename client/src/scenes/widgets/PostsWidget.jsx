@@ -1,10 +1,12 @@
+import { Box } from '@mui/material';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts, setFriends } from "state";
+import { setPosts } from "state";
 import PostWidget from './PostWidget';
 
 
-const PostsWidget = ({ userId, isProfile = false }) => {
+
+const PostsWidget = ({ userId, isProfile = false, socket }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state ) => state.token);
@@ -21,6 +23,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     setLoading(false);
   };
 
+
   const getUserPosts = async () => {
     const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
       method: 'GET',
@@ -28,7 +31,9 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     });
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
+    setLoading(false);
   };
+
 
   useEffect(() => {
     if (isProfile) {
@@ -37,11 +42,12 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       getPosts();
     }   
   }, [posts.length]) //eslint-disable-line react-hooks/exhaustive-deps
+
+
   if (isLoading) {
     return;
-  }
+  };
 
-  
   return(
     <>
     {posts.map(
@@ -57,8 +63,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         likes,
         comments,
       }) =>
+      <Box key={_id}>
         <PostWidget
-          key={_id}
           postId={_id}
           postUserId={userId}
           name={`${firstName} ${lastName}`}
@@ -68,7 +74,10 @@ const PostsWidget = ({ userId, isProfile = false }) => {
           userImageUrl={userImageUrl}
           likes={likes}
           comments={comments}
+          socket={socket}
         />
+        <Box mb='2rem' />
+      </Box>
     )}
     </>
   )

@@ -3,6 +3,7 @@ import { getStorage } from "firebase-admin/storage"
 import Post from '../models/Post.js';
 
 
+
 export const getUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -113,9 +114,6 @@ export const changeAvatar = async (req, res) => {
     const { id } = req.params;
     const newImageUrl = req.body.newImageUrl;
     const user = await User.findById(id);
-    //const oldImageUrl = user.imageUrl.replace(/%20/g, ' ');
-    //const fileLink = oldImageUrl;
-    //const fileName = fileLink.slice(59, fbInstance.length).trimLeft();
     const fbStorage = getStorage();
     const fileRef = fbStorage.bucket().file(user.imageName);
       fileRef

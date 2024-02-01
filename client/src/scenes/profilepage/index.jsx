@@ -7,15 +7,20 @@ import FriendListWidget from "scenes/widgets/FriendListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import UserWidget from "scenes/widgets/UserWidget";
+import { io } from 'socket.io-client';
 
-const ProfilePage = () => {
+
+
+const ProfilePage = ({ socket }) => {
+  const loggedUser = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const isNonMobileScreen = useMediaQuery('(min-width: 1000px)');
   const [user, setUser] = useState();
   const { userId } = useParams();
-  const token = useSelector((state) => state.token);
-  const isNonMobileScreen = useMediaQuery('(min-width: 1000px)')
 
 
   const getUser = async () => {
+    console.log('Get user')
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` }
@@ -23,17 +28,26 @@ const ProfilePage = () => {
     const data = await response.json();
     setUser(data);
   };
-  
+
+
   useEffect(() => {
+    if (!socket.current) {
+      console.log('prof socket current useEffeft')
+      socket.current = io("ws://localhost:3002");
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  
+
+  useEffect(() => {
+    console.log('Get user useEffect')
     getUser();
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  if(!user) return null;
   
-
-  return (
+  return(
     <Box>
       <Navbar />
+        {user && (
         <Box
           width='100%'
           padding='2rem 6%'
@@ -44,20 +58,25 @@ const ProfilePage = () => {
           <Box flexBasis={isNonMobileScreen ? '26%' : undefined}>
             <UserWidget userId={userId} imageUrl={user.imageUrl}/>
             <Box m='2rem 0' />
-            <FriendListWidget userId={userId} />
+            <FriendListWidget userId={userId} isProfile/>
           </Box>
           <Box 
             flexBasis={isNonMobileScreen ? '42%' : undefined}
             mt={isNonMobileScreen ? undefined : '2rem'}
           >
-            <MyPostWidget imageUrl={user.imageUrl} />
-            <Box m='2rem 0' />
+            {userId === loggedUser._id && (
+              <>
+              <MyPostWidget imageUrl={loggedUser.imageUrl} />
+              <Box m='2rem 0' />
+              </>
+            )}
             <PostsWidget userId={userId} isProfile />
           </Box>         
         </Box>
+        )}
     </Box>
   )
-
 };
+
 
 export default ProfilePage;

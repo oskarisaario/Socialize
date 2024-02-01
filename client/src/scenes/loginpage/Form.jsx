@@ -47,6 +47,8 @@ const initialValuesLogin = {
   password:  ''
 };
 
+
+
 const Form = () => {
   const [pageType, setPageType] = useState('login');
   const { palette } = useTheme();
@@ -58,7 +60,7 @@ const Form = () => {
 
 
   const register = async (values, onSubmitProps) => {
-    // This allows us to send form info with image
+    // This allows to send form info with image
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
@@ -73,11 +75,11 @@ const Form = () => {
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-
     if (savedUser) {
       setPageType('login');
     }
   };
+
 
   const login = async(values, onSubmitProps) => {
     const loggedInUserResponse = await  fetch(
@@ -106,6 +108,7 @@ const Form = () => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
+
 
   return(
     <Formik
@@ -269,7 +272,7 @@ const Form = () => {
       )}
     </Formik>
   )
-}
+};
 
 
 export default Form;

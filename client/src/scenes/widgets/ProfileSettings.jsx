@@ -17,10 +17,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser, setLogout } from 'state';
 
 
+
 const ProfileSettings = () => {
-  const dispatch = useDispatch();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const { palette } = useTheme();
   const medium = palette.neutral.medium;
@@ -40,6 +41,7 @@ const ProfileSettings = () => {
     setImage(null);
   };
 
+
   const handelDeleteAccount = async () => {
     const response = await fetch(`http://localhost:3001/users/${_id}/deleteUser`, {
       method: 'DELETE',
@@ -53,6 +55,7 @@ const ProfileSettings = () => {
     }
   };
  
+  
   return(
     <WidgetWrapper>
         <Typography textAlign='center'>Change Profile Picture:</Typography>

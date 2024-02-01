@@ -2,7 +2,6 @@ import {
   PersonAddOutlined,
   PersonRemoveOutlined,
   Delete,
-  ConstructionOutlined
 } from '@mui/icons-material';
 import {
   Box,
@@ -12,13 +11,13 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFriends, setPosts } from 'state';
-import { useEffect } from "react";
 import FlexBetween from './flexBetween';
 import UserImage from './UserImage';
 import { useNavigate } from 'react-router-dom';
 
 
-const Friend = ({ friendId, name, subtitle, userImageUrl, postId }) => {
+
+const Friend = ({ friendId, name, subtitle, userImageUrl, postId, isProfile = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -27,7 +26,7 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId }) => {
 
   
   const { palette } = useTheme();
-  const  primaryLight = palette.primary.light;
+  const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
@@ -50,6 +49,7 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId }) => {
     dispatch(setFriends({ friends: data }));
   };
 
+  
   const deletePost = async () => {
     const response = await fetch(
       `http://localhost:3001/posts/${postId}/deletePost`,
@@ -65,7 +65,7 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId }) => {
     dispatch(setPosts({ posts: data }));
   };
 
-  
+ 
   return(
     <FlexBetween>
       <FlexBetween gap='1rem'>
@@ -73,7 +73,7 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId }) => {
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
-            navigate(0);
+            //navigate(0);
         }}
         >
           <Typography
@@ -106,12 +106,14 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId }) => {
         )}
       </IconButton>
       ) : (
+        !isProfile && (
         <IconButton
           onClick={() => deletePost()}
           sx={{ backgroundColor: primaryLight, p: '0.6rem' }}
         >
           <Delete sx={{ color: primaryDark }}/>
         </IconButton>
+      )
       )}
     </FlexBetween>
   )

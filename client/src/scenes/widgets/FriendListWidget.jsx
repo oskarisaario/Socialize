@@ -27,8 +27,8 @@ const FriendListWidget = ({ userId }) => {
     dispatch(setFriends({ friends: data }))
   };
 
+
   useEffect(() => {
-    console.log('effect')
     getFriends();
   }, [user.imageUrl]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -51,11 +51,13 @@ const FriendListWidget = ({ userId }) => {
             name={`${friend.firstName} ${friend.lastName}`}
             subtitle={friend.occupation}
             userImageUrl={friend.imageUrl}
+            isProfile
           />
         ))}
       </Box>
     </WidgetWrapper>
   )
 };
+
 
 export default FriendListWidget;

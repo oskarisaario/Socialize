@@ -3,6 +3,7 @@ import User from '../models/User.js';
 import { getStorage } from "firebase-admin/storage"
 
 
+
 export const  createPost = async (req, res) => {
   try {
     const { userId, description, imageUrl, imageName } = req.body;
@@ -95,6 +96,7 @@ export const deletePost = async(req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
 
 export const addComment = async (req, res) => {
   try {

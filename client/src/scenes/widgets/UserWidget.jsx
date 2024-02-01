@@ -1,6 +1,5 @@
 import {
   ManageAccountsOutlined,
-  EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined
 } from '@mui/icons-material';
@@ -16,6 +15,7 @@ import ProfileSettings from './ProfileSettings';
 
 
 const UserWidget = ({ userId, imageUrl }) => {
+  const loggedUser = useSelector((state) => state.user);
   const [user, setUser] = useState(null);
   const [isUserSettings, setIsUserSettings] = useState(false);
   const { palette } = useTheme();
@@ -24,6 +24,7 @@ const UserWidget = ({ userId, imageUrl }) => {
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
+
 
   const getUser = async() => {
     const response = await fetch(
@@ -37,6 +38,7 @@ const UserWidget = ({ userId, imageUrl }) => {
     setUser(data);
   };
 
+
   useEffect(() => {
     getUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -44,7 +46,6 @@ const UserWidget = ({ userId, imageUrl }) => {
   if (!user) {
     return null;
   }
-
   const {
     firstName,
     lastName,
@@ -78,12 +79,16 @@ const UserWidget = ({ userId, imageUrl }) => {
                 {firstName} {lastName}
               </Typography>
             </Box>
+        
         </FlexBetween>
+        {userId === loggedUser._id && (
           <ManageAccountsOutlined 
             onClick={() => setIsUserSettings(!isUserSettings)} 
             sx={{ '&:hover': { cursor: 'pointer'} }}
           />
+          )}
         </FlexBetween>
+        
         <Divider />
 
         {/* SECOND ROW */}

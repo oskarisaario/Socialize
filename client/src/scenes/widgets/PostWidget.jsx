@@ -24,16 +24,17 @@ import { setPost } from "state";
 
 
 
-const PostWidget = ({postId, postUserId, name, description, location, imageUrl, userImageUrl, likes, comments}) => {
-  const [isComments, setIsComments] = useState(false);
-  const [comment, setComment] = useState('');
+const PostWidget = ({postId, postUserId, name, description, location, imageUrl, userImageUrl, likes, comments, socket}) => {
+  const token = useSelector((state) => state.token);
+  const loggedInUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector((state) => state.token);
-  const loggedInUserId = useSelector((state) => state.user._id);
+  const [isComments, setIsComments] = useState(false);
+  const [comment, setComment] = useState('');
   const [isLoaded, setIsLoaded] = useState(true);
-  const isLiked = Boolean(likes[loggedInUserId]);
+  const isLiked = Boolean(likes[loggedInUser._id]);
   const likeCount = Object.keys(likes).length;
+
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
@@ -48,7 +49,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: loggedInUserId })
+      body: JSON.stringify({ userId: loggedInUser._id })
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
@@ -65,25 +66,31 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
       body: JSON.stringify({ 
         comment: {
           comment,
-          userImageUrl,
-          userId: loggedInUserId
+          userImageUrl: loggedInUser.imageUrl,
+          userId: loggedInUser._id,
+          name: `${loggedInUser.firstName} ${loggedInUser.lastName}`
         } 
       })
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
+    socket.current.emit('sendNotification', {
+      senderName: `${loggedInUser.firstName} ${loggedInUser.lastName}`,
+      receiverId: postUserId,
+      type: 'commented your Post'
+    });
     setComment('');
   };
   
   
-  const addDefaultImg = e => {
+  const addDefaultImg = (e) => {
     e.target.src = "https://demofree.sirv.com/nope-not-here.jpg"
     setIsLoaded(false);
-
-  }
+  };
   
+
   return(
-    <WidgetWrapper m='2rem 0'>
+    <WidgetWrapper>
       <Friend 
         friendId={postUserId}
         name={name}
@@ -156,7 +163,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
                   key={`${name}-${i}`} 
                   mt='0.5rem' 
                   mb='0.5rem' 
-                  sx={{ width: '100%', backgroundColor: palette.neutral.light, borderRadius: '2rem', padding: '0.5rem 1rem' }}
+                  sx={{ width: '100%', backgroundColor: palette.neutral.light, borderRadius: '2rem', padding: '5px' }}
                 >
                   <Box display="flex" alignItems="center" gap='1rem'>
                     <Box 
@@ -165,6 +172,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
                     >
                       <UserImage image={comment.userImageUrl} size='30px'/>
                     </Box>
+                    <Typography>{comment.name}: </Typography>
                     <Typography sx={{ color: main }}>
                       {comment.comment}
                     </Typography>
@@ -178,6 +186,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
     </WidgetWrapper>
   );
 };
+
 
 export default PostWidget;
 
