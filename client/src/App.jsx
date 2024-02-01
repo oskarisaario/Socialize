@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import HomePage from "scenes/homepage";
+import HomePage from "scenes/homepage.jsx";
 import LoginPage from "scenes/loginpage";
 import ProfilePage from "scenes/profilepage";
 import ChatPage from "scenes/chatpage";
