@@ -1,8 +1,8 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import HomePage from "./scenes/homepage/index.jsx";
-import LoginPage from "scenes/loginpage";
-import ProfilePage from "scenes/profilepage";
-import ChatPage from "scenes/chatpage";
+import LoginPage from "./scenes/loginpage/index.jsx";
+import ProfilePage from "./scenes/profilepage/index.jsx";
+import ChatPage from "./scenes/chatpage/index.jsx";
 import { useMemo, useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setNotifications } from "state";
