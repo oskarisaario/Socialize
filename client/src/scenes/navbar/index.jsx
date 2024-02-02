@@ -24,9 +24,9 @@ import {
   Close,
  } from '@mui/icons-material';
  import { useDispatch, useSelector } from "react-redux";
- import { setMode, setLogout, deleteNotifications } from 'state';
+ import { setMode, setLogout, deleteNotifications } from '../../state/index.js';
  import { useNavigate } from "react-router-dom";
- import FlexBetween from "components/flexBetween";
+ import FlexBetween from "../../components/flexBetween.jsx";
 
 
 const Navbar = () => {

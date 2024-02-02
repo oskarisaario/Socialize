@@ -10,11 +10,11 @@ import {
   IconButton, 
 } from '@mui/material';
 import Dropzone from 'react-dropzone';
-import FlexBetween from 'components/flexBetween';
-import WidgetWrapper from 'components/WidgetWrapper';
+import FlexBetween from '../../components/flexBetween';
+import WidgetWrapper from '../../components/WidgetWrapper';
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, setLogout } from 'state';
+import { setUser, setLogout } from '../../state';
 
 
 

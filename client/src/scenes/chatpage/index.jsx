@@ -1,12 +1,12 @@
 import { Box, useMediaQuery, Typography, useTheme, InputBase, Button } from "@mui/material";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import Navbar from "scenes/navbar";
-import FriendsForChat from "scenes/widgets/FriendsForChat";
-import WidgetWrapper from "components/WidgetWrapper";
-import Message from 'components/Message';
-import Chat from 'scenes/widgets/Chat';
-import FlexBetween from 'components/flexBetween';
+import Navbar from "../navbar/index.jsx";
+import FriendsForChat from "../widgets/FriendsForChat.jsx";
+import WidgetWrapper from "../../components/WidgetWrapper.jsx";
+import Message from '../../components/Message.jsx';
+import Chat from '../widgets/Chat.jsx';
+import FlexBetween from '../../components/flexBetween.jsx';
 import { io } from 'socket.io-client';
 
 

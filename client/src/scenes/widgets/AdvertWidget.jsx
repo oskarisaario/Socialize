@@ -1,6 +1,6 @@
 import { Typography, useTheme } from "@mui/material";
-import FlexBetween from "components/flexBetween";
-import WidgetWrapper from "components/WidgetWrapper";
+import FlexBetween from "../../components/flexBetween.jsx";
+import WidgetWrapper from "../../components/WidgetWrapper";
 
 
 

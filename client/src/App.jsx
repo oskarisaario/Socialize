@@ -5,7 +5,7 @@ import ProfilePage from "./scenes/profilepage/index.jsx";
 import ChatPage from "./scenes/chatpage/index.jsx";
 import { useMemo, useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setNotifications } from "state";
+import { setNotifications } from "./state/index.js";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";

@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import FlexBetween from "components/flexBetween";
-import UserImage from 'components/UserImage';
+import FlexBetween from "../../components/flexBetween.jsx";
+import UserImage from '../../components/UserImage.jsx';
 
 
 

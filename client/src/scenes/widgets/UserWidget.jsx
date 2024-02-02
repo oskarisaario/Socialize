@@ -7,9 +7,9 @@ import { Box, Typography, Divider, useTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserImage from 'components/UserImage';
-import FlexBetween from 'components/flexBetween';
-import WidgetWrapper from 'components/WidgetWrapper';
+import UserImage from '../../components/UserImage.jsx';
+import FlexBetween from '../../components/flexBetween.jsx';
+import WidgetWrapper from '../../components/WidgetWrapper.jsx';
 import ProfileSettings from './ProfileSettings';
 
 

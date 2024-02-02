@@ -1,8 +1,8 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux";
-import WidgetWrapper from "components/WidgetWrapper";
-import UserImage from 'components/UserImage';
+import WidgetWrapper from "../../components/WidgetWrapper.jsx";
+import UserImage from '../../components/UserImage.jsx';
 
 
 

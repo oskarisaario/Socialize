@@ -13,14 +13,14 @@ import {
   InputBase,
   useTheme,  
 } from '@mui/material';
-import FlexBetween from "components/flexBetween";
-import Friend from 'components/Friend';
-import WidgetWrapper from "components/WidgetWrapper";
-import UserImage from "components/UserImage";
+import FlexBetween from "../../components/flexBetween";
+import Friend from '../../components/Friend';
+import WidgetWrapper from "../../components/WidgetWrapper";
+import UserImage from "../../components/UserImage";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { setPost } from "state";
+import { setPost } from "../../state";
 
 
 

@@ -18,12 +18,13 @@ import {
   useMediaQuery  
 } from '@mui/material';
 import Dropzone from 'react-dropzone';
-import FlexBetween from 'components/flexBetween';
-import WidgetWrapper from 'components/WidgetWrapper';
+import FlexBetween from '../../components/flexBetween.jsx';
+import WidgetWrapper from '../../components/WidgetWrapper.jsx';
+import UserImage from '../../components/UserImage.jsx';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPosts } from 'state';
-import UserImage from 'components/UserImage';
+import { setPosts } from '../../state/index.js';
+
 
 
 
