@@ -26,7 +26,7 @@ import { changeAvatar } from "./controllers/users.js";
 import path from 'path';
 
 
-
+const __dirname = path.resolve();
 
 //CONFIGURATION
 dotenv.config();
@@ -99,5 +99,3 @@ mongoose.connect(process.env.MONGO_URL)
 .then(() => {
   app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
-
-const __dirname = path.resolve();
