@@ -22,6 +22,9 @@ import { createPost } from './controllers/posts.js';
 import { verifyToken } from "./middleware/auth.js";
 import { changeAvatar } from "./controllers/users.js";
 
+//for build
+import path from 'path';
+
 
 
 
@@ -82,6 +85,13 @@ app.use('/posts', postRoutes);
 app.use('/chats', chatRoutes);
 app.use('/messages', messageRoutes);
 
+//for build
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
+
 
 //Set MongoDB
 const PORT = process.env.PORT || 6001;
@@ -89,3 +99,5 @@ mongoose.connect(process.env.MONGO_URL)
 .then(() => {
   app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
+
+const __dirname = path.resolve();
