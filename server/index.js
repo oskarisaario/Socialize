@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
-import helmet from "helmet";
+//import helmet from "helmet";
 import morgan from "morgan";
 
 
@@ -33,7 +33,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 //app.use(helmet());
-app.use(
+/*app.use(
   app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
@@ -42,7 +42,7 @@ app.use(
       }
   })
   ));
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));*/
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
