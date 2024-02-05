@@ -8,7 +8,7 @@ import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
-import { Server } from 'socket'
+import { Server } from 'socket.io'
 
 
 import admin from 'firebase-admin';
