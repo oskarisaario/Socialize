@@ -31,7 +31,7 @@ const ProfileSettings = () => {
     const formData = new FormData();
     formData.append('picture', image)
     formData.append('imageUrl', image.name)
-    const response = await fetch(`http://localhost:3001/users/${_id}/changeAvatar`, {
+    const response = await fetch(`https://socialize-0746.onrender.com/users/${_id}/changeAvatar`, {
       method: 'PATCH',
       headers: {Authorization: `Bearer ${token}` },
       body: formData
@@ -43,7 +43,7 @@ const ProfileSettings = () => {
 
 
   const handelDeleteAccount = async () => {
-    const response = await fetch(`http://localhost:3001/users/${_id}/deleteUser`, {
+    const response = await fetch(`https://socialize-0746.onrender.com/users/${_id}/deleteUser`, {
       method: 'DELETE',
       headers: {Authorization: `Bearer ${token}` }
     });

@@ -20,8 +20,7 @@ const ProfilePage = ({ socket }) => {
 
 
   const getUser = async () => {
-    console.log('Get user')
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`https://socialize-0746.onrender.com/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` }
     })

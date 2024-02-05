@@ -27,7 +27,7 @@ const ChatPage = ({ socket }) => {
 
   const getChats = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/chats/${user._id}`, {
+      const response = await fetch(`https://socialize-0746.onrender.com/chats/${user._id}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -41,7 +41,7 @@ const ChatPage = ({ socket }) => {
 
   const getMessages = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/messages/getMessages/${currentChat._id}`, {
+      const response = await fetch(`https://socialize-0746.onrender.com/messages/getMessages/${currentChat._id}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -113,7 +113,7 @@ const ChatPage = ({ socket }) => {
       text: newMessage
     });
     try {
-      const response = await fetch(`http://localhost:3001/messages/createMessage`, {
+      const response = await fetch(`https://socialize-0746.onrender.com/messages/createMessage`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

@@ -36,7 +36,7 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId, isProfile = fa
   
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
+      `https://socialize-0746.onrender.com/users/${_id}/${friendId}`,
       {
         method: 'PATCH',
         headers: {
@@ -52,7 +52,7 @@ const Friend = ({ friendId, name, subtitle, userImageUrl, postId, isProfile = fa
   
   const deletePost = async () => {
     const response = await fetch(
-      `http://localhost:3001/posts/${postId}/deletePost`,
+      `https://socialize-0746.onrender.com/posts/${postId}/deletePost`,
       {
         method: 'PATCH',
         headers: {

@@ -40,7 +40,7 @@ const FriendsForChat = ({ userId, onlineUsers, setCurrentChat, chats }) => {
 
   const handleGetChat = async (userId, ofriend) => {
     try {
-      const response = await fetch(`http://localhost:3001/chats/find/${userId}/${ofriend}`, {
+      const response = await fetch(`https://socialize-0746.onrender.com/chats/find/${userId}/${ofriend}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -54,7 +54,7 @@ const FriendsForChat = ({ userId, onlineUsers, setCurrentChat, chats }) => {
 
   const handleNewChat = async (senderId, receiverId) => {
     try {
-      const response = await fetch(`http://localhost:3001/chats/createChat`, {
+      const response = await fetch(`https://socialize-0746.onrender.com/chats/createChat`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

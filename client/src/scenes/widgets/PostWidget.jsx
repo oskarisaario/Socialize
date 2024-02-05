@@ -43,7 +43,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
 
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+    const response = await fetch(`https://socialize-0746.onrender.com/posts/${postId}/like`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
 
 
   const addComment = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/addComment`, {
+    const response = await fetch(`https://socialize-0746.onrender.com/posts/${postId}/addComment`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,

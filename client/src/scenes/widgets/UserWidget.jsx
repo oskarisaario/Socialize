@@ -28,7 +28,7 @@ const UserWidget = ({ userId, imageUrl }) => {
 
   const getUser = async() => {
     const response = await fetch(
-      `http://localhost:3001/users/${userId}`,
+      `https://socialize-0746.onrender.com/users/${userId}`,
       {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}`}
