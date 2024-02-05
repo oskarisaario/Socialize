@@ -8,7 +8,7 @@ import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
-//import http from 'http'
+import http from 'http'
 import { Server } from 'socket.io'
 
 
@@ -53,7 +53,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
 
-const server = CreateServer(app);
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'wss://socialize-0746.onrender.com/',
