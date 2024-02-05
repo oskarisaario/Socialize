@@ -8,6 +8,7 @@ import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
+import http from 'http'
 import { Server } from 'socket.io'
 
 
@@ -50,7 +51,8 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
-const io = new Server(app);
+const server = http.createServer(app);
+const io = new Server(server);
 
 //FIREBASE 
 const serviceAccount = "./socialize.json";
