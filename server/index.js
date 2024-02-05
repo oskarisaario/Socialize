@@ -10,7 +10,7 @@ import morgan from "morgan";
 
 //import http from 'http'
 import { Server } from 'socket.io'
-import { CreateServer } from 'node:http'
+
 
 
 import admin from 'firebase-admin';
@@ -53,15 +53,19 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
 
-const server = CreateServer(app);
+/*const server = CreateServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'wss://socialize-0746.onrender.com/',
     methods: ['GET', 'POST'],
     credentials: 'true'
   }
-});
-//const io = new Server('socialize-0746.onrender.com')
+});*/
+const io = new Server('socialize-0746.onrender.com', {
+  cors: {
+    origin:'*:*'
+  }
+})
 
 
 //FIREBASE 
@@ -178,5 +182,5 @@ io.on('connect', (socket) => {
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL)
 .then(() => {
-  server.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
+  app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
