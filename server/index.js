@@ -9,7 +9,8 @@ import multer from "multer";
 import morgan from "morgan";
 
 //import http from 'http'
-//import { Server } from 'socket.io'
+import { Server } from 'socket.io'
+import { CreateServer } from 'node:http'
 
 
 import admin from 'firebase-admin';
@@ -52,14 +53,14 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
 
-/*const server = http.createServer(app);
+const server = CreateServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'wss://socialize-0746.onrender.com/',
     methods: ['GET', 'POST'],
     credentials: 'true'
   }
-});*/
+});
 //const io = new Server('socialize-0746.onrender.com')
 
 
@@ -116,7 +117,7 @@ app.get('*', (req, res) => {
 })
 
 //Set Socket 
-/*let users = [];
+let users = [];
 
 console.log('socket auki?')
 const addUser = (userId, socketId) => {
@@ -170,12 +171,12 @@ io.on('connect', (socket) => {
     removeUser(socket.id);
     io.emit('getUsers', users);
   });
-});*/
+});
 
 
 //Set MongoDB
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL)
 .then(() => {
-  app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
+  server.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
