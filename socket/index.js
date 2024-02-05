@@ -1,4 +1,4 @@
-const io = require('socket.io')('https://socialize-0746.onrender.com', {
+const io = require('socket.io')('https://socialize-0746.onrender.com:3001', {
   cors:{
     origin:'*:*'
   },
