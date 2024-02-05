@@ -26,7 +26,7 @@ function App() {
     if (!socket.current && isAuth) {
       console.log('app.jsx yrittää connectaa socket')
       //socket.current = io("ws://localhost:3002", {transports: ['websocket', 'polling', 'flashsocket']});
-      socket.current = io("wss://socialize-0746.onrender.com", {transports: ['websocket', 'polling', 'flashsocket']});
+      socket.current = io("https://socialize-0746.onrender.com", {transports: ['websocket', 'polling', 'flashsocket']});
       socket.current.emit('addUser', user._id);
     }
     if (isAuth) {
