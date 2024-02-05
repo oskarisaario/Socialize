@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     if (!socket.current && isAuth) {
-      socket.current = io("ws://localhost:3002");
+      socket.current = io("ws://localhost:3002", {transports: ['websocket', 'polling', 'flashsocket']});
       socket.current.emit('addUser', user._id);
     }
     if (isAuth) {
