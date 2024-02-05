@@ -8,8 +8,8 @@ import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
-import http from 'http'
-import { Server } from 'socket.io'
+//import http from 'http'
+//import { Server } from 'socket.io'
 
 
 import admin from 'firebase-admin';
@@ -60,7 +60,7 @@ const io = new Server(server, {
     credentials: 'true'
   }
 });*/
-const io = new Server('socialize-0746.onrender.com')
+//const io = new Server('socialize-0746.onrender.com')
 
 
 //FIREBASE 
@@ -116,7 +116,7 @@ app.get('*', (req, res) => {
 })
 
 //Set Socket 
-let users = [];
+/*let users = [];
 
 console.log('socket auki?')
 const addUser = (userId, socketId) => {
@@ -170,7 +170,7 @@ io.on('connect', (socket) => {
     removeUser(socket.id);
     io.emit('getUsers', users);
   });
-});
+});*/
 
 
 //Set MongoDB
