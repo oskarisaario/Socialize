@@ -8,6 +8,8 @@ import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
+import { Server } from 'socket'
+
 
 import admin from 'firebase-admin';
 import FirebaseStorage from 'multer-firebase-storage';
@@ -48,7 +50,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
-
+const io = new Server(app);
 
 //FIREBASE 
 const serviceAccount = "./socialize.json";
@@ -101,6 +103,63 @@ app.use(express.static(path.join(__dirname, '/client/dist')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
+
+//Set Socket 
+let users = [];
+
+console.log('socket auki?')
+const addUser = (userId, socketId) => {
+  !users.some((user) => user.userId === userId) &&
+    users.push({ userId, socketId });
+};
+
+const removeUser = (socketId) => {
+  users = users.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (userId) => {
+  return users.find((user) => user.userId === userId);
+};
+
+//When connect
+io.on('connect', (socket) => {
+  console.log(`a user connected: ${socket.id}`)
+  socket.on('addUser', userId=>{
+    addUser(userId, socket.id);
+    io.emit('getUsers', users);
+  });
+
+
+  //Send and Get messages
+  socket.on('sendMessage', ({ senderId, receiverId, text }) => {
+    const user = getUser(receiverId);
+    if (user) {
+      io.to(user.socketId).emit('getMessage', {
+        senderId,
+        text
+      });
+    }
+  });
+
+  //Handle Notifications
+  socket.on('sendNotification', ({ senderName, receiverId, type }) => {
+    const user = getUser(receiverId);
+    if (user) {
+      console.log('sending notification')
+      io.to(user.socketId).emit('getNotification', {
+        senderName,
+        type
+      });
+    }
+  });
+
+  //When disconnect
+  socket.on('disconnect', ({}) => {
+    console.log('a user has disconnected!')
+    removeUser(socket.id);
+    io.emit('getUsers', users);
+  });
+});
 
 
 //Set MongoDB
