@@ -53,19 +53,19 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
 
-/*const server = CreateServer(app);
+const server = CreateServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'wss://socialize-0746.onrender.com/',
     methods: ['GET', 'POST'],
     credentials: 'true'
   }
-});*/
-const io = new Server('socialize-0746.onrender.com', {
+});
+/*const io = new Server('socialize-0746.onrender.com', {
   cors: {
     origin:'*:*'
   }
-})
+})*/
 
 
 //FIREBASE 
