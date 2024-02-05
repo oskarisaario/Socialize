@@ -52,7 +52,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 //app.use(cors());
 //const server = http.createServer(app);
-const io = new Server('https://socialize-0746.onrender.com',{ cors: { origin: "*" }, path: 'https://socialize-0746.onrender.com'}).listen('https://socialize-0746.onrender.com');
+const io = new Server('https://socialize-0746.onrender.com');
 
 //FIREBASE 
 const serviceAccount = "./socialize.json";
