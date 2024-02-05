@@ -60,7 +60,8 @@ const io = new Server(server, {
     credentials: 'true'
   }
 });*/
-const io = new Server('socialize-0746.onrender.com').listen(443)
+const io = new Server('socialize-0746.onrender.com')
+io.listen(443)
 
 //FIREBASE 
 const serviceAccount = "./socialize.json";
