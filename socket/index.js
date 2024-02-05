@@ -1,12 +1,12 @@
-const io = require('socket.io')('https://socialize-0746.onrender.com:3001', {
+/*const io = require('socket.io')('https://socialize-0746.onrender.com:3001', {
   cors:{
     origin:'*:*'
   },
-});
+});*/
 
 let users = [];
 
-console.log('socket auki?')
+//console.log('socket auki?')
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
