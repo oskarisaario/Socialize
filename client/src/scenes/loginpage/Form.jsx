@@ -79,12 +79,11 @@ const Form = () => {
       setPageType('login');
     }
   };
-
-
+  //http://localhost:3001/auth/login
   const login = async(values, onSubmitProps) => {
     try {
       const loggedInUserResponse = await  fetch(
-        'http://localhost:3001/auth/login',
+        'https://socialize-0746.onrender.com/auth/login',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
