@@ -14,7 +14,7 @@ const PostsWidget = ({ userId, isProfile = false, socket }) => {
 
 
   const getPosts = async () => {
-    const response = await fetch('http://localhost:3001/posts', {
+    const response = await fetch('https://socialize-0746.onrender.com/posts', {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -25,7 +25,7 @@ const PostsWidget = ({ userId, isProfile = false, socket }) => {
 
 
   const getUserPosts = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
+    const response = await fetch(`https://socialize-0746.onrender.com/posts/${userId}/posts`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });
