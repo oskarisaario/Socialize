@@ -78,7 +78,7 @@ export const deletePost = async(req, res) => {
     const { postId } = req.params;
     const post = await Post.findById(postId);
     const userId = post.userId;
-    const isImageUrl = await Post.findById({imageUrl:{$exists:true}});
+    const isImageUrl = await Post.findById(postId, {imageUrl:{$exists:true}});
     if (isImageUrl) {
       const fbStorage = getStorage();
       const fileRef = fbStorage.bucket().file(post.imageName);
