@@ -37,6 +37,18 @@ const __dirname = path.resolve();
 dotenv.config();
 const app = express();
 app.use(express.json());
+
+
+const whiteList = ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 //app.use(helmet());
 /*app.use(
   app.use(helmet.contentSecurityPolicy({
@@ -51,7 +63,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));*/
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 
 const server = http.createServer(app);
 const io = new Server(server, {
