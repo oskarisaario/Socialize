@@ -69,6 +69,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
+    path: '/socket.io',
     methods: ['GET', 'POST'],
   }
 });
