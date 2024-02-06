@@ -1,21 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-//import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import multer from "multer";
-//import helmet from "helmet";
 import morgan from "morgan";
-
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 
-
-
 import admin from 'firebase-admin';
 import FirebaseStorage from 'multer-firebase-storage';
-
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -39,45 +33,10 @@ const app = express();
 app.use(express.json());
 
 
-/*const whiteList = ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whiteList.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}*/
-//app.use(helmet());
-/*app.use(
-  app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", 'https://unpkg.com'],
-        connectSrc: ["'self'", 'https://reqres.in']
-      }
-  })
-  ));
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));*/
+
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-//app.use(cors(corsOptions));
-
-/*const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
-    path: '/socket.io',
-    methods: ['GET', 'POST'],
-  }
-});
-/*const io = new Server('socialize-0746.onrender.com', {
-  cors: {
-    origin:'*:*'
-  }
-})*/
 
 
 //FIREBASE 
@@ -132,14 +91,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
-//TESTAUSTA
+
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   pingTimeout: 60000,
   cors: {
     origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
-    // credentials: true,
   },
 });
 

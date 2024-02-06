@@ -55,8 +55,8 @@ const ChatPage = ({ socket }) => {
 
   useEffect(() => {
     if (!socket.current) {
-      console.log('soc current useEffeft chatpage')
-      socket.current = io("ws://localhost:3002");
+      socket.current = io("https://socialize-0746.onrender.com", {transports: ['websocket']});
+      //socket.current = io("ws://localhost:3002");
     }
     socket.current.on('getMessage', data => {
       setArrivalMessage({

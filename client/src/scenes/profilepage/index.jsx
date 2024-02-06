@@ -31,8 +31,8 @@ const ProfilePage = ({ socket }) => {
 
   useEffect(() => {
     if (!socket.current) {
-      console.log('prof socket current useEffeft')
-      socket.current = io("ws://localhost:3002");
+      socket.current = io("https://socialize-0746.onrender.com", {transports: ['websocket']});
+      //socket.current = io("ws://localhost:3002");
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
   

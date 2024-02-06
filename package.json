@@ -1,8 +1,8 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js && node socket/index.js && cd client npm run start",
-    "build": "cd server && npm install && cd .. && cd socket && npm install && cd .. && cd client && npm install && npm run build"
+    "start": "node server/index.js && cd client npm run start",
+    "build": "cd server && npm install && cd .. && cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
