@@ -79,18 +79,18 @@ export const deletePost = async(req, res) => {
     const post = await Post.findById(postId);
     const userId = post.userId;
     if (post.imageUrl !== null) {
-    const fbStorage = getStorage();
-    const fileRef = fbStorage.bucket().file(post.imageName);
-      fileRef
-        .delete()
-        .then(() => {
-          console.log('Deleted file succesfully');
-        })
-          .catch(err => {
-            console.error(`Failed to delete file`, err);
-            return;
-          });
-    }
+      const fbStorage = getStorage();
+      const fileRef = fbStorage.bucket().file(post.imageName);
+        fileRef
+          .delete()
+          .then(() => {
+            console.log('Deleted file succesfully');
+          })
+            .catch(err => {
+              console.error(`Failed to delete file`, err);
+              return;
+            });
+      }
     await Post.findByIdAndDelete(postId)
     const userPosts = await Post.find({ userId })
     res.status(200).json(userPosts);
