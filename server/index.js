@@ -8,7 +8,7 @@ import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
-//import http from 'http'
+import { createServer } from 'http'
 import { Server } from 'socket.io'
 
 
@@ -132,24 +132,25 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
+//TESTAUSTA
+const httpServer = createServer(app);
 
-
-//Set MongoDB
-const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL)
-.then(() => {
-  app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
-}).catch((error) => console.log(`${error} did not connect`));
-
-const server = app;
-
-const io = new Server(server, {
+const io = new Server(httpServerserver, {
   pingTimeout: 60000,
   cors: {
     origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
     // credentials: true,
   },
 });
+
+//Set MongoDB
+const PORT = process.env.PORT || 6001;
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+  httpServer.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
+}).catch((error) => console.log(`${error} did not connect`));
+
+
 
 //Set Socket 
 let users = [];
