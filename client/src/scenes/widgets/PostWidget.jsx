@@ -145,7 +145,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
       {isComments && (
         <Box>
           <FlexBetween gap='1rem'>
-            <UserImage image={userImageUrl} size='30px' />
+            <UserImage image={loggedInUser.imageUrl} size='30px' />
             <InputBase 
               placeholder='Write your comment...'
               onChange={(e) => setComment(e.target.value)}
