@@ -101,7 +101,7 @@ const PostWidget = ({postId, postUserId, name, description, location, imageUrl, 
       <Typography color={main} sx={{ mt: '1rem' }}>
         {description}
       </Typography>
-      {imageUrl && (
+      {imageUrl !== null && (
         <img 
           width='100%'
           height='auto'
