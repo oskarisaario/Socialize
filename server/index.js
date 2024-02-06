@@ -1,15 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import cors from "cors";
+//import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import multer from "multer";
 //import helmet from "helmet";
 import morgan from "morgan";
 
-import http from 'http'
-import { Server } from 'socket.io'
+//import http from 'http'
+//import { Server } from 'socket.io'
 
 
 
@@ -39,7 +39,7 @@ const app = express();
 app.use(express.json());
 
 
-const whiteList = ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com']
+/*const whiteList = ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whiteList.indexOf(origin) !== -1 || !origin) {
@@ -48,7 +48,7 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   }
-}
+}*/
 //app.use(helmet());
 /*app.use(
   app.use(helmet.contentSecurityPolicy({
@@ -63,9 +63,9 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));*/
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
-const server = http.createServer(app);
+/*const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
@@ -132,6 +132,25 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
+
+
+//Set MongoDB
+const PORT = process.env.PORT || 6001;
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+  app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
+}).catch((error) => console.log(`${error} did not connect`));
+
+const server = app;
+
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
+    // credentials: true,
+  },
+});
+
 //Set Socket 
 let users = [];
 
@@ -188,11 +207,3 @@ io.on('connect', (socket) => {
     io.emit('getUsers', users);
   });
 });
-
-
-//Set MongoDB
-const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL)
-.then(() => {
-  app.listen(PORT, () => console.log(`Server running on Port: ${PORT}`));
-}).catch((error) => console.log(`${error} did not connect`));

@@ -25,15 +25,16 @@ function App() {
   useEffect(() => {
     if (!socket.current && isAuth) {
       console.log('app.jsx yrittää connectaa socket')
-      //socket.current = io("ws://localhost:3002", {transports: ['websocket', 'polling', 'flashsocket']});
+      //socket.current = io("ws://localhost:3002", {transports: ['websocket']});
+      socket.current = io("https://socialize-0746.onrender.com", {transports: ['websocket']});
       try {
-        socket.current = io("https://socialize-0746.onrender.com", {
+        /*socket.current = io("https://socialize-0746.onrender.com", {
           transports: ['websocket'],
           path: '/socket.io',
           forceNew: true,
           reconnectionAttempts: 3,
           timeout: 2000,
-        });
+        });*/
       } catch (error) {
         console.log(error)
       }
