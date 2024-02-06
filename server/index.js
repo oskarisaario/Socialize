@@ -9,7 +9,7 @@ import multer from "multer";
 import morgan from "morgan";
 
 //import http from 'http'
-//import { Server } from 'socket.io'
+import { Server } from 'socket.io'
 
 
 
@@ -143,7 +143,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 const server = app;
 
-const io = require("socket.io")(server, {
+const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
     origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
