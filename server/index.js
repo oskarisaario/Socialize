@@ -56,9 +56,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'wss://socialize-0746.onrender.com/',
+    origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
     methods: ['GET', 'POST'],
-    credentials: 'true'
   }
 });
 /*const io = new Server('socialize-0746.onrender.com', {
@@ -123,7 +122,7 @@ app.get('*', (req, res) => {
 //Set Socket 
 let users = [];
 
-console.log('socket auki?')
+
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
