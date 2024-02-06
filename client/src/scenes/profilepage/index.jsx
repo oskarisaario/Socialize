@@ -38,7 +38,6 @@ const ProfilePage = ({ socket }) => {
   
 
   useEffect(() => {
-    console.log('Get user useEffect')
     getUser();
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -1,6 +1,7 @@
 import { Box, useMediaQuery, Typography, useTheme, InputBase, Button } from "@mui/material";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Navbar from "../navbar/index.jsx";
 import FriendsForChat from "../widgets/FriendsForChat.jsx";
 import WidgetWrapper from "../../components/WidgetWrapper.jsx";
@@ -13,7 +14,8 @@ import { io } from 'socket.io-client';
 
 const ChatPage = ({ socket }) => {
   const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token)
+  const token = useSelector((state) => state.token);
+  const { userId } = useParams();
   const scrollRef = useRef();
   const { palette } = useTheme();
   const isNonMobileScreen = useMediaQuery('(min-width: 1000px)');
@@ -27,7 +29,7 @@ const ChatPage = ({ socket }) => {
 
   const getChats = async () => {
     try {
-      const response = await fetch(`https://socialize-0746.onrender.com/chats/${user._id}`, {
+      const response = await fetch(`https://socialize-0746.onrender.com/chats/${userId}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });

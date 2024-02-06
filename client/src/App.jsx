@@ -28,16 +28,16 @@ function App() {
       socket.current.emit('addUser', user._id);
     }
     if (isAuth) {
-    socket.current.on('getUsers', users => {
-      setOnlineUsers(user.friends.filter((f) => users.some((u) => u.userId === f._id)));
-    });
-    socket.current.on('getNotification', data => {
-      const notification = {};
-      notification.senderName = data.senderName;
-      notification.type = data.type;
-      dispatch(setNotifications( notification ));
-    });
-    return () => socket.current.off("getNotification");
+      socket.current.on('getUsers', users => {
+        setOnlineUsers(user.friends.filter((f) => users.some((u) => u.userId === f._id)));
+      });
+      socket.current.on('getNotification', data => {
+        const notification = {};
+        notification.senderName = data.senderName;
+        notification.type = data.type;
+        dispatch(setNotifications( notification ));
+      });
+      return () => socket.current.off("getNotification");
     }
   }, [isAuth]) // eslint-disable-line react-hooks/exhaustive-deps
 
