@@ -135,7 +135,7 @@ app.get('*', (req, res) => {
 //TESTAUSTA
 const httpServer = createServer(app);
 
-const io = new Server(httpServerserver, {
+const io = new Server(httpServer, {
   pingTimeout: 60000,
   cors: {
     origin: ['wss://socialize-0746.onrender.com', 'https://socialize-0746.onrender.com'],
