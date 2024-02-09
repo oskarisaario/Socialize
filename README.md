@@ -5,6 +5,9 @@ Pictures are stored to Firebase and links to those pictures to mongoDB.
 Socket.io is used for notifications and for real-time chat possibility!
 
 You are able to:
+
+-SignIn and Signup(Authozation is token based)
+
 -Create/delete user
 
 -Change your profilePicture
@@ -17,4 +20,4 @@ You are able to:
 
 -Add/delete friends
 
--Chat in real-time
+-Chat in real-time(By Socket.io)
